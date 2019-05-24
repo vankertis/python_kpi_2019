@@ -103,44 +103,6 @@ def calculate_nCore(incomes, required_tax):
                 break
     return taxes
 
-def nCore (c, summ, n, b_acum):
-    what_half = summ / 2
-    x = []
-    if c < what_half:
-        a = c / n
-        # Making first loop without xi
-        if a > b_acum[0] / 2:
-            x.append(b_acum[0] / 2)
-        else:
-            for j in range(n):
-                x.append(a)
-            return x
-        # Creating another loop for the rest of elements (starting from the second element)
-        for i in range(1, n):
-            a = (c - x[i - 1]) / (n - i)
-            # Updating c for the next iteration
-            c = c - x[i - 1]
-            # If element is bigger than income, we add income value to the list
-            if a > b_acum[i] / 2:
-                x.append(b_acum[i] / 2)
-            # If element is smaller than income then we are starting the filling for the rest of elements
-            else:
-                for j in range(i, n):
-                    x.append(a)
-                break
-        return x
-    else:
-        for i in range(n):
-            a = (summ-c) / (n-i)
-            if a>(b_acum[i] / 2):
-                x.append(b_acum[i] / 2)
-                summ = summ-(b_acum[i] / 2)
-            else:
-                for j in range(i, n):
-                    x.append(b_acum[j]-a)
-                break
-        return x
-
 tot_income = income_sum(b1)
 
 print("Summa is: "+ str(tot_income))
